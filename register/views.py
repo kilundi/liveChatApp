@@ -8,8 +8,6 @@ from .forms import SignUpForm
 
 def frontpage(request):
     return render(request, 'register/frontpage.html')
-def rooms(request):
-    return render(request, 'register/rooms.html')
 
 def signup(request):
     if request.method == 'POST':

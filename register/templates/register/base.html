@@ -1,4 +1,4 @@
-{% load static %}
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 
@@ -10,11 +10,11 @@
 
     <title>{% block title %}{% endblock %}Live Chat APP</title>
     <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
-    <script src="https://cdn.tailwindcss.com"></script>
+    {% tailwind_css %}
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 text-white">
-    <section class="bg-gray-50 dark:bg-gray-900 flex flex-col justify-center h-screen">
+    <section class="bg-gray-50 dark:bg-gray-900 flex flex-col justify-center min-h-screen text-white z-10">
         <nav class="flex items-center justify-between px-4 py-6 bg-teal-800 fixed top-0 w-full">
             <div>
                 <a href="/" class="text-xl text-white flex items-center gap-3">
@@ -127,9 +127,12 @@
                 {% endif %}
             </div>
         </nav>
+        <div class=" h-screen pt-28 gap-4">
+            {% block content %}
 
-        {% block content %}
-        {% endblock %}
+            {% endblock %}
+        </div>
+
 
     </section>
     <script src="{% static 'js/darkmode.js'%}"></script>
