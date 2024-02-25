@@ -5,7 +5,6 @@ from django.shortcuts import render
 from.models import Room
 
 @login_required
-
 def rooms(request):
     username = request.user.username
     rooms = Room.objects.all()
