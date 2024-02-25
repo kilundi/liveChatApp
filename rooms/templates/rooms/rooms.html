@@ -1,9 +1,23 @@
 {% extends 'register/base.html' %}
-
+{% load static %}
 {% block title %}Rooms | {% endblock %}
 
 {% block content %}
-<h1 class=" text-4xl fixed  w-full ml-5">Welcome, {{ username }}!</h1>
+<div class=" flex justify-around items-center ">
+
+    <h1 class=" text-4xl  w-full ml-5">Welcome, {{ username }}!</h1>
+    <p>
+        {% if is_active %}
+        <img src="{% static 'images/status.svg' %}" alt="status">
+        {% else %}
+        inactive
+        {% endif %}
+
+    </p>
+
+</div>
+
+
 <div class="mt-12">
     <div class="w-full flex flex-wrap items-center">
         {% for room in rooms %}
@@ -11,7 +25,8 @@
             <div class="p-4 bg-white shadow rounded-xl text-center">
                 <h2 class="mb-5 text-2xl font-semibold text-black">{{ room.name }}</h2>
 
-                <a href="#" class=" px-4 py-3 block rounded-xl text-white bg-teal-700 hover:bg-teal-800"> JOIN</a>
+                <a href="{% url 'room' room.slug %}"
+                    class=" px-4 py-3 block rounded-xl text-white bg-teal-700 hover:bg-teal-800"> JOIN</a>
 
             </div>
         </div>

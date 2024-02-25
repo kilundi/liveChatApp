@@ -19,7 +19,7 @@
             <div>
                 <a href="/" class="text-xl text-white flex items-center gap-3">
                     <img src="{% static 'images/logo.png' %}" alt="logo" class="w-10 h-10">
-                    <span>Django Live Chat</span>
+                    <span>Live Chat</span>
                 </a>
             </div>
 
@@ -132,9 +132,10 @@
 
             {% endblock %}
         </div>
-
-
     </section>
+    {% block scripts %}
+
+    {% endblock %}
     <script src="{% static 'js/darkmode.js'%}"></script>
     <script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
 </body>
