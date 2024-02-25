@@ -5,7 +5,7 @@
 {% block content %}
 <div class=" flex justify-around items-center ">
 
-    <h1 class=" text-4xl  w-full ml-5">Welcome, {{ username }}!</h1>
+    <h1 class=" text-4xl  w-full ml-5 text-gray-500 dark:text-gray-300">Welcome, {{ username }}!</h1>
     <p>
         {% if is_active %}
         <img src="{% static 'images/status.svg' %}" alt="status">
