@@ -75,8 +75,10 @@
 
 {% block scripts %}
 {{room.slug|json_script:"json-roomname"}}
+{{request.user.username|json_script:"json-username"}}
 <script>
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
     const chatSocket = new WebSocket(
         'ws://'
         + window.location.host
@@ -87,10 +89,43 @@
 
     chatSocket.onmessage = function (e) {
         console.log('onmessage');
+
+        const data = JSON.parse(e.data);
+
+        if (data.message) {
+            let html = '<div class="p-4 bg-gray-400 rounded-xl">';
+            html += '<p class="font-semibold">' + data.username + '</p>';
+            html += '<p>' + data.message + '</p></div >';
+
+            document.querySelector('#chat-message').innerHTML += html;
+        } else {
+            alert('The message was empty');
+        }
     }
 
     chatSocket.onclose = function (e) {
         console.log('onclose');
     }
+
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+        e.preventDefault();
+
+        // Check if the WebSocket connection is open
+        if (chatSocket.readyState === WebSocket.OPEN) {
+            const message = document.getElementById('chat-message-input').value;
+
+            chatSocket.send(JSON.stringify({
+                'username': userName,
+                'message': message,
+                'room': roomName
+            }));
+
+            document.getElementById('chat-message-input').value = '';
+        } else {
+            console.error('WebSocket is not open.');
+        }
+    }
+
+
 </script>
 {% endblock %}
